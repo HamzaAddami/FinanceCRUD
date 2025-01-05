@@ -1,5 +1,6 @@
 
 import { apiService } from './api.js';
+import Chart from 'chart.js/auto';
 
 export async function initializeCharts() {
     try {

@@ -4,6 +4,7 @@ export const crudOperations = {
     createListView: (entity, data) => {
         const container = document.createElement('div');
         container.className = 'space-y-4';
+        window.crudOperations = crudOperations;
 
         // Header with Add button
         const header = document.createElement('div');

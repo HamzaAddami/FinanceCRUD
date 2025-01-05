@@ -2,6 +2,8 @@ import {apiService} from './api.js';
 import {crudOperations} from './crud.js';
 import {initializeCharts} from './chart.js';
 
+
+console.log(crudOperations);
 document.addEventListener('DOMContentLoaded', () => {
     // Handle login form submission
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
