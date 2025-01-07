@@ -1,9 +1,23 @@
 import {apiService} from './api.js';
 import {crudOperations} from './crud.js';
 import {initializeCharts} from './chart.js';
-
+import { lang } from './lang.js';
 
 console.log(crudOperations);
+
+document.addEventListener('DOMContentLoaded', () => {
+    lang.updateUI();
+    
+});
+
+const languageSelector = document.getElementById('languageSelector');
+    if (languageSelector) {
+        languageSelector.value = lang.currentLanguage;
+        languageSelector.addEventListener('change', (e) => {
+            lang.setLanguage(e.target.value);
+        });
+    }
+
 document.addEventListener('DOMContentLoaded', () => {
     // Handle login form submission
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -16,11 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.success) {
                 document.getElementById('loginPage').classList.add('hidden');
                 document.getElementById('dashboardPage').classList.remove('hidden');
-                document.getElementById('userInfo').textContent = `Welcome, ${result.user.name}`;
+                document.getElementById('userInfo').textContent = `${lang.t('welcome')}, ${result.user.name}`;
                 loadDashboard();
             }
         } catch (error) {
-            alert('Invalid credentials');
+            alert(lang.t('error'));
         }
     });
 
@@ -42,33 +56,35 @@ async function loadDashboard() {
     contentArea.innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-lg font-semibold mb-2">Total Users</h3>
+                <h3 class="text-lg font-semibold mb-2" data-i18n="totalUsers">Total Users</h3>
                 <p class="text-3xl font-bold text-blue-600" id="totalUsers">Loading...</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-lg font-semibold mb-2">Total Products</h3>
+                <h3 class="text-lg font-semibold mb-2" data-i18n="totalProducts">Total Products</h3>
                 <p class="text-3xl font-bold text-green-600" id="totalProducts">Loading...</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-lg font-semibold mb-2">Total Clients</h3>
+                <h3 class="text-lg font-semibold mb-2" data-i18n="totalClients">Total Clients</h3>
                 <p class="text-3xl font-bold text-purple-600" id="totalClients">Loading...</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-lg font-semibold mb-2">Total Orders</h3>
+                <h3 class="text-lg font-semibold mb-2" data-i18n="totalOrders">Total Orders</h3>
                 <p class="text-3xl font-bold text-orange-600" id="totalOrders">Loading...</p>
             </div>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-lg font-semibold mb-4">Orders Over Time</h3>
+                <h3 class="text-lg font-semibold mb-4" data-i18n="ordersOverTime">Orders Over Time</h3>
                 <canvas id="ordersChart"></canvas>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h3 class="text-lg font-semibold mb-4">Top Products</h3>
+                <h3 class="text-lg font-semibold mb-4" data-i18n="topProducts">Top Products</h3>
                 <canvas id="productsChart"></canvas>
             </div>
         </div>
     `;
+
+    lang.updateUI();
 
     // Load statistics
     loadStatistics();
@@ -96,7 +112,7 @@ async function loadStatistics() {
 
 async function navigateToPage(page) {
     const contentArea = document.getElementById('contentArea');
-    contentArea.innerHTML = '<div class="text-center">Loading...</div>';
+    contentArea.innerHTML = '<div class="text-center">Loading...</div>'; 
 
     try {
         if (page === 'dashboard') {
@@ -110,7 +126,7 @@ async function navigateToPage(page) {
         contentArea.appendChild(listView);
     } catch (error) {
         console.error('Error:', error);
-        contentArea.innerHTML = '<div class="text-red-600">Error loading content</div>';
+        contentArea.innerHTML = `<div class="min-h-screen flex items-center justify-center"><img src='../public/Pictures/504.png'></div>`;
     }
 }
 
@@ -130,3 +146,7 @@ function handleRouting() {
         navigateToPage(page);
     }
 }
+
+
+console.log(item)
+// console.log(field)

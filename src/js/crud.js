@@ -72,13 +72,19 @@ export const crudOperations = {
     },
 
     showEditForm: async (entity, id) => {
-        window.location.hash = `#${entity}/edit/${id}`;
+        console.log('Fetching item data for editing...');
         const item = await apiService[entity].getById(id);
+        console.log('Fetched Item:', item); // Debug log
+        if (!item) {
+            alert('Item data not found!');
+            return;
+        }
         const fields = await crudOperations.getEntityFields(entity);
         const form = crudOperations.createForm(entity, fields, item);
         document.getElementById('contentArea').innerHTML = '';
         document.getElementById('contentArea').appendChild(form);
     },
+    
 
     createForm: (entity, fields, item = null) => {
         const form = document.createElement('form');
@@ -87,9 +93,9 @@ export const crudOperations = {
             <h3 class="text-xl font-bold mb-6">${item ? 'Edit' : 'Add'} ${entity.slice(0, -1)}</h3>
             ${fields.map(field => `
                 <div class="mb-4">
-                    <label class="block text-gray-700 text-sm font-bold mb-2">${field}</label>
-                    <input type="text" name="${field}" 
-                           value="${item ? item[field] || '' : ''}"
+                    <label for="${field}" class="block text-gray-700 text-sm font-bold mb-2">${field}</label>
+                    <input type="text" id="${field}" name="${field}" 
+                           value="${item && item[field] !== undefined ? item[field] : ''}" 
                            class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
             `).join('')}
@@ -104,7 +110,7 @@ export const crudOperations = {
                 </button>
             </div>
         `;
-
+    
         form.onsubmit = async (e) => {
             e.preventDefault();
             const formData = Object.fromEntries(new FormData(form));
@@ -120,9 +126,11 @@ export const crudOperations = {
                 alert('An error occurred');
             }
         };
-
+    
         return form;
     },
+    
+    
 
     deleteItem: async (entity, id) => {
         if (confirm('Are you sure you want to delete this item?')) {

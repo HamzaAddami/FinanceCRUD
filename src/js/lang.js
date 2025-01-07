@@ -1,4 +1,3 @@
-// lang.js
 const translations = {
     en: {
         dashboard: 'Dashboard',
@@ -18,7 +17,13 @@ const translations = {
         username: 'Username',
         password: 'Password',
         welcome: 'Welcome',
-        logout: 'Logout'
+        logout: 'Logout',
+        totalUsers: 'Total Users',
+        totalProducts: 'Total Products',
+        totalClients: 'Total Clients',
+        totalOrders: 'Total Orders',
+        ordersOverTime: 'Orders Over Time',
+        topProducts: 'Top Products'
     },
     fr: {
         dashboard: 'Tableau de bord',
@@ -38,11 +43,18 @@ const translations = {
         username: 'Nom d\'utilisateur',
         password: 'Mot de passe',
         welcome: 'Bienvenue',
-        logout: 'Déconnexion'
+        logout: 'Déconnexion',
+        totalUsers: 'Total des utilisateurs',
+        totalProducts: 'Total des produits',
+        totalClients: 'Total des clients',
+        totalOrders: 'Total des commandes',
+        ordersOverTime: 'Commandes au fil du temps',
+        topProducts: 'Meilleurs produits'
+
     }
 };
 
-const lang = {
+export const lang = {
     currentLanguage: 'en',
 
     setLanguage(language) {
@@ -63,3 +75,4 @@ const lang = {
         });
     }
 };
+

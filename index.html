@@ -3,36 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="src/css/output.css">
+    <title data-i18n="dashboard">Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" href="src/css/output.css"> -->
 </head>
-<body class="bg-gray-100">
-    Login Page 
-     <div id="loginPage" class="min-h-screen flex items-center justify-center">
-        <div class="bg-white p-8 rounded-lg shadow-md w-96">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
-            <form id="loginForm" class="space-y-4">
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
-                    <input type="text" id="username" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+<body class="">
+    <!-- Login Page -->
+    <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 ">
+        <div id="loginPage" class="min-h-screen flex items-center justify-center">
+            <div class="bg-white p-8 rounded-lg shadow-md w-96">
+                <h2 class="text-2xl font-bold mb-6 text-center text-gray-800" data-i18n="login">Login</h2>
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" data-i18n="username">Username</label>
+                        <input type="text" id="username" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2" data-i18n="password">Password</label>
+                        <input type="password" id="password" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors" data-i18n="login">
+                        Login
+                    </button>
+                </form>
                 </div>
-                <div>
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <input type="password" id="password" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors">
-                    Login
-                </button>
-            </form>
+            
         </div>
     </div>
 
-    
+    <!-- Add language selector -->
+    <div class="mt-4 text-center">
+        <select id="languageSelector" class="p-2 border rounded-md">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+        </select>
+    </div> 
+
+    <!-- Dashboard Page -->
     <div id="dashboardPage" class="min-h-screen hidden">
         <!-- Sidebar -->
         <div class="fixed inset-y-0 left-0 w-64 bg-gray-800">
             <div class="flex items-center justify-center h-16 bg-gray-900">
-                <h1 class="text-white text-xl font-bold">Admin Panel</h1>
+                <h1 class="text-white text-xl font-bold" data-i18n="dashboard">Admin Panel</h1>
             </div>
             <nav class="mt-6">
                 <div class="px-4 py-3">
@@ -41,27 +53,32 @@
                 <ul class="space-y-2 px-4">
                     <li>
                         <a href="#" data-page="dashboard" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
-                            <span>Dashboard</span>
+                            <span data-i18n="dashboard">Dashboard</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" data-page="products" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
-                            <span>Products</span>
+                            <span data-i18n="products">Products</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" data-page="clients" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
-                            <span>Clients</span>
+                            <span data-i18n="clients">Clients</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" data-page="users" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
-                            <span>Users</span>
+                            <span data-i18n="users">Users</span>
                         </a>
                     </li>
                     <li>
                         <a href="#" data-page="orders" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
-                            <span>Orders</span>
+                            <span data-i18n="orders">Orders</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" id="logoutButton" class="nav-link flex items-center px-4 py-3 bg-red-700 text-white hover:bg-red-700 rounded-md">
+                            <span data-i18n="logout">Logout</span>
                         </a>
                     </li>
                 </ul>
@@ -70,16 +87,15 @@
 
         <div class="ml-64 p-8">
             <div id="contentArea">
-                
+                <!-- Content will be loaded here -->
             </div>
         </div>
     </div>
+</div>
+</div>
 
-    <!-- <script src="src/js/api.js"></script> -->
-    <!-- <script src="src/js/charts.js"></script> -->
-    <!-- <script src="src/js/crud.js"></script> -->
     <script type="module" src="src/js/dashboard.js"></script>
-    <!-- <script src="src/js/lang.js"></script>
-    <script src="src/js/utils.js"></script> -->
+    <script src="src/js/lang.js"></script>
+    <script src="src/js/utils.js"></script>
 </body>
 </html>
