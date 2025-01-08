@@ -38,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Handle logout
+    document.getElementById('logoutButton').addEventListener('click', async(e) => { 
+        e.preventDefault();
+        document.getElementById('loginPage').classList.remove('hidden');
+        document.getElementById('dashboardPage').classList.add('hidden');
+    });
+
     // Handle navigation
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
