@@ -155,5 +155,32 @@ function handleRouting() {
 }
 
 
-console.log(item)
-// console.log(field)
+
+// const title = "Welcome to your Finance App";
+// const paragraph = "Manage your finances with ease";
+// const elementH = document.getElementById("typewriterTitle");
+// const elementP = document.getElementById("typewriterParagraph");
+
+// // Fonction pour l'animation typewriter
+// function typeWriter(textToType, element, delay = 100, callback = null) {
+//   let index = 0;
+
+//   function writeCharacter() {
+//     if (index < textToType.length) {
+//       element.textContent += textToType.charAt(index);
+//       index++;
+//       setTimeout(writeCharacter, delay);
+//     } else if (callback) {
+//       callback(); // Appelle une autre fonction après la fin de l'animation
+//     }
+//   }
+
+//   writeCharacter();
+// }
+
+// // Démarrer les animations
+// document.addEventListener("DOMContentLoaded", () => {
+//   typeWriter(title, elementH, 100, () => {
+//     typeWriter(paragraph, elementP, 100); // Lance l'animation du paragraphe après le titre
+//   });
+// });

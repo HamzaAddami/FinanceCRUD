@@ -23,7 +23,9 @@ const translations = {
         totalClients: 'Total Clients',
         totalOrders: 'Total Orders',
         ordersOverTime: 'Orders Over Time',
-        topProducts: 'Top Products'
+        topProducts: 'Top Products',
+        welcomeTitle: 'Welcome to your Finance App',
+        welcomeSubtitle: 'Manage your finances with ease'
     },
     fr: {
         dashboard: 'Tableau de bord',
@@ -49,7 +51,9 @@ const translations = {
         totalClients: 'Total des clients',
         totalOrders: 'Total des commandes',
         ordersOverTime: 'Commandes au fil du temps',
-        topProducts: 'Meilleurs produits'
+        topProducts: 'Meilleurs produits',
+        welcomeTitle: 'Bienvenue sur votre application financière',
+        welcomeSubtitle: 'Gérez vos finances en toute simplicité'
 
     }
 };

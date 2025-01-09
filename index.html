@@ -3,33 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="public/Pictures/emsi.png">
     <title data-i18n="dashboard">Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- <link rel="stylesheet" href="src/css/output.css"> -->
 </head>
 <body class="">
     <!-- Login Page -->
-    <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 ">
+    <div class="bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
         <div id="loginPage" class="min-h-screen flex items-center justify-center">
-            <div class="bg-white p-8 rounded-lg shadow-md w-96">
-                <h2 class="text-2xl font-bold mb-6 text-center text-gray-800" data-i18n="login">Login</h2>
-                <form id="loginForm" class="space-y-4">
-                    <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2" data-i18n="username">Username</label>
-                        <input type="text" id="username" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-gray-700 text-sm font-bold mb-2" data-i18n="password">Password</label>
-                        <input type="password" id="password" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors" data-i18n="login">
-                        Login
-                    </button>
-                </form>
+            <div class="flex items-center justify-between w-3/5 p-8 bg-green-500 rounded-lg shadow-lg">
+                <!-- Section du titre -->
+                <div class="w-1/2 text-left pr-8">
+                    <h1 class="text-5xl font-bold text-white mb-4" data-i18n="welcomeTitle" id="typewriterTitle"></h1>
+                    <p class="text-xl text-white" data-i18n="welcomeSubtitle" id="typewriterParagraph"></p>
                 </div>
-            
+                <!-- Section du formulaire -->
+                <div class="bg-white p-8 rounded-lg shadow-md w-96">
+                    <h2 class="text-3xl font-bold mb-6 text-center text-green-800" data-i18n="login">Login</h2>
+                    <form id="loginForm" class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" data-i18n="username">Username</label>
+                            <input type="text" id="username" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-2" data-i18n="password">Password</label>
+                            <input type="password" id="password" class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition-colors" data-i18n="login">
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+    
 
     <!-- Add language selector -->
     <div class="mt-4 text-center">
@@ -44,7 +53,8 @@
         <!-- Sidebar -->
         <div class="fixed inset-y-0 left-0 w-64 bg-gray-800">
             <div class="flex items-center justify-center h-16 bg-gray-900">
-                <h1 class="text-white text-xl font-bold" data-i18n="dashboard">Admin Panel</h1>
+                <!-- <h1 class="text-white text-xl font-bold" data-i18n="dashboard">Admin Panel</h1> -->
+                <img src="public/Pictures/emsi.png" alt="Logo" class="h-12 w-12">
             </div>
             <nav class="mt-6">
                 <div class="px-4 py-3">

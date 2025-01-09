@@ -72,33 +72,68 @@ export const crudOperations = {
     },
 
     showEditForm: async (entity, id) => {
-        console.log('Fetching item data for editing...');
-        const item = await apiService[entity].getById(id);
-        console.log('Fetched Item:', item); // Debug log
-        if (!item) {
-            alert('Item data not found!');
-            return;
+        try {
+            console.log(`Fetching ${entity} with ID:`, id);
+            const response = await apiService[entity].getById(id);
+            const item = response.data; // Extract data from axios response
+            console.log('Fetched Item:', item);
+            
+            if (!item) {
+                alert('Item data not found!');
+                return;
+            }
+            
+            const fields = await crudOperations.getEntityFields(entity);
+            const form = crudOperations.createForm(entity, fields, item);
+            document.getElementById('contentArea').innerHTML = '';
+            document.getElementById('contentArea').appendChild(form);
+        } catch (error) {
+            console.error('Error fetching item:', error);
+            alert(`Error fetching ${entity}: ${error.message}`);
         }
-        const fields = await crudOperations.getEntityFields(entity);
-        const form = crudOperations.createForm(entity, fields, item);
-        document.getElementById('contentArea').innerHTML = '';
-        document.getElementById('contentArea').appendChild(form);
     },
-    
 
     createForm: (entity, fields, item = null) => {
         const form = document.createElement('form');
         form.className = 'max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md';
+        
+        // If it's an edit form, add a hidden input for ID
+        const idField = item ? `<input type="hidden" name="id" value="${item.id}">` : '';
+        
         form.innerHTML = `
             <h3 class="text-xl font-bold mb-6">${item ? 'Edit' : 'Add'} ${entity.slice(0, -1)}</h3>
-            ${fields.map(field => `
-                <div class="mb-4">
-                    <label for="${field}" class="block text-gray-700 text-sm font-bold mb-2">${field}</label>
-                    <input type="text" id="${field}" name="${field}" 
-                           value="${item && item[field] !== undefined ? item[field] : ''}" 
-                           class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                </div>
-            `).join('')}
+            ${idField}
+            ${fields.map(field => {
+                // Handle different input types based on field name
+                let inputType = 'text';
+                if (field.includes('date')) inputType = 'date';
+                if (field.includes('price') || field.includes('quantity')) inputType = 'number';
+                if (field.includes('email')) inputType = 'email';
+                
+                let value = '';
+                if (item && item[field] !== undefined) {
+                    // Format date fields
+                    if (inputType === 'date' && item[field]) {
+                        value = new Date(item[field]).toISOString().split('T')[0];
+                    } else {
+                        value = item[field];
+                    }
+                }
+                
+                return `
+                    <div class="mb-4">
+                        <label for="${field}" class="block text-gray-700 text-sm font-bold mb-2">
+                            ${field.replace(/_/g, ' ').replace(/([A-Z])/g, ' $1').toLowerCase()}
+                        </label>
+                        <input type="${inputType}" 
+                               id="${field}" 
+                               name="${field}" 
+                               value="${value}"
+                               ${inputType === 'number' ? 'step="0.01"' : ''}
+                               class="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                `;
+            }).join('')}
             <div class="flex justify-end space-x-4">
                 <button type="button" onclick="history.back()" 
                         class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors">
@@ -114,21 +149,38 @@ export const crudOperations = {
         form.onsubmit = async (e) => {
             e.preventDefault();
             const formData = Object.fromEntries(new FormData(form));
+            
+            // Clean up the data before sending
+            Object.keys(formData).forEach(key => {
+                // Convert empty strings to null
+                if (formData[key] === '') {
+                    formData[key] = null;
+                }
+                // Convert numeric strings to numbers
+                if (!isNaN(formData[key]) && formData[key] !== '') {
+                    formData[key] = Number(formData[key]);
+                }
+            });
+            
             try {
+                console.log('Submitting data:', formData);
                 if (item) {
-                    await apiService[entity].update(item.id, formData);
+                    const id = formData.id;
+                    delete formData.id; 
+                    await apiService[entity].update(id, formData);
                 } else {
                     await apiService[entity].create(formData);
                 }
                 window.location.hash = `#${entity}`;
             } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred');
+                console.error('Error submitting form:', error);
+                alert(`Error: ${error.response?.data?.message || error.message}`);
             }
         };
     
         return form;
     },
+
     
     
 
