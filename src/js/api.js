@@ -10,7 +10,7 @@ export const apiService = {
     login: async (username, password) => {
         // Mock login for now
         if (username === 'admin' && password === 'admin') {
-            return { success: true, user: { id: 1, name: 'Admin User' } };
+            return { success: true, user: { id: 1, name: 'Hamza' } };
         }
         throw new Error('Invalid credentials');
     },

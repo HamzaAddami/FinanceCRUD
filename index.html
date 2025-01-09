@@ -7,6 +7,19 @@
     <title data-i18n="dashboard">Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- <link rel="stylesheet" href="src/css/output.css"> -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            overflow-x: hidden;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        /* Additional scrollbar styles if needed */
+    </style>
 </head>
 <body class="">
     <!-- Login Page -->
@@ -51,38 +64,38 @@
     <!-- Dashboard Page -->
     <div id="dashboardPage" class="min-h-screen hidden">
         <!-- Sidebar -->
-        <div class="fixed inset-y-0 left-0 w-64 bg-gray-800">
+        <div class="fixed inset-y-0 left-0 w-64 bg-green-500">
             <div class="flex items-center justify-center h-16 bg-gray-900">
                 <!-- <h1 class="text-white text-xl font-bold" data-i18n="dashboard">Admin Panel</h1> -->
                 <img src="public/Pictures/emsi.png" alt="Logo" class="h-12 w-12">
             </div>
             <nav class="mt-6">
                 <div class="px-4 py-3">
-                    <div id="userInfo" class="text-white text-xl"></div>
+                    <div id="userInfo" class="text-green-800 text-xl font-bold"></div>
                 </div>
                 <ul class="space-y-2 px-4">
                     <li>
-                        <a href="#" data-page="dashboard" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
+                        <a href="#" data-page="dashboard" class="nav-link flex items-center px-4 py-3 text-white hover:bg-green-800 rounded-md">
                             <span data-i18n="dashboard">Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-page="products" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
+                        <a href="#" data-page="products" class="nav-link flex items-center px-4 py-3 text-white hover:bg-green-800 rounded-md">
                             <span data-i18n="products">Products</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-page="clients" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
+                        <a href="#" data-page="clients" class="nav-link flex items-center px-4 py-3 text-white hover:bg-green-800 rounded-md">
                             <span data-i18n="clients">Clients</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-page="users" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
+                        <a href="#" data-page="users" class="nav-link flex items-center px-4 py-3 text-white hover:bg-green-800 rounded-md">
                             <span data-i18n="users">Users</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" data-page="orders" class="nav-link flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 rounded-md">
+                        <a href="#" data-page="orders" class="nav-link flex items-center px-4 py-3 text-white hover:bg-green-800 rounded-md">
                             <span data-i18n="orders">Orders</span>
                         </a>
                     </li>
@@ -107,5 +120,8 @@
     <script type="module" src="src/js/dashboard.js"></script>
     <script src="src/js/lang.js"></script>
     <script src="src/js/utils.js"></script>
+    <footer class="bg-green-500 text-center text-white p-5">
+        &copy; 2025 Hamza Addami. All rights reserved.
+    </footer>
 </body>
 </html>

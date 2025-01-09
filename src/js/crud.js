@@ -12,7 +12,7 @@ export const crudOperations = {
         header.innerHTML = `
             <h2 class="text-2xl font-bold text-gray-800">${entity.charAt(0).toUpperCase() + entity.slice(1)}</h2>
             <button onclick="crudOperations.showAddForm('${entity}')" 
-                    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
+                    class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-800 transition-colors">
                 Add ${entity.slice(0, -1)}
             </button>
         `;
